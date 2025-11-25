@@ -5,16 +5,17 @@ import { GoalCard } from './GoalCard';
 import { SummaryCard } from './SummaryCard';
 import { formatCurrency, formatPayback } from '../../lib/utils';
 import { exportToPDF } from '../../lib/pdfExport';
-import { MCKINSEY_BENCHMARKS, CLIENT_TARGETS, MCKINSEY_SOURCE, PAYP_FEE_PERCENTAGE } from '../../lib/constants';
+import { MCKINSEY_BENCHMARKS, CLIENT_TARGETS, MCKINSEY_SOURCE } from '../../lib/constants';
 import type { CalculatorFormData, CalculationResults } from '../../types';
 
 interface ResultsViewProps {
   data: CalculatorFormData;
   results: CalculationResults;
+  paypFeePercentage: number;
   onReset: () => void;
 }
 
-export const ResultsView = ({ data, results, onReset }: ResultsViewProps) => {
+export const ResultsView = ({ data, results, paypFeePercentage, onReset }: ResultsViewProps) => {
   const [isExporting, setIsExporting] = useState(false);
 
   const handleExportPDF = async () => {
@@ -100,7 +101,7 @@ export const ResultsView = ({ data, results, onReset }: ResultsViewProps) => {
       <SummaryCard
         label="Fee PAYP (Año 1)"
         value={formatCurrency(results.paypFee)}
-        sublabel={`${Math.round(PAYP_FEE_PERCENTAGE * 100)}% de ahorros demostrados`}
+        sublabel={`${Math.round(paypFeePercentage * 100)}% de ahorros demostrados`}
       />
       <SummaryCard label="Beneficio Neto Anual" value={formatCurrency(results.netBenefit)} highlight />
       {(() => {

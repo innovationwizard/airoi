@@ -8,6 +8,7 @@ interface CalculatorProps {
   view: 'calculator' | 'results';
   formData: CalculatorFormData | null;
   results: CalculationResults | null;
+  paypFeePercentage: number;
   loading: boolean;
   onCalculate: (data: CalculatorFormData) => void;
   onReset: () => void;
@@ -18,6 +19,7 @@ export const Calculator = ({
   view,
   formData,
   results,
+  paypFeePercentage,
   loading,
   onCalculate,
   onReset,
@@ -39,7 +41,7 @@ export const Calculator = ({
       )}
 
       {view === 'results' && formData && results && (
-        <ResultsView data={formData} results={results} onReset={onReset} />
+        <ResultsView data={formData} results={results} paypFeePercentage={paypFeePercentage} onReset={onReset} />
       )}
     </main>
     <Footer />

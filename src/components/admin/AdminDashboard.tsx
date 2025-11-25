@@ -1,5 +1,7 @@
-import { BarChart3, LogOut, Loader2, Users, TrendingUp, Calculator } from 'lucide-react';
+import { useState } from 'react';
+import { BarChart3, LogOut, Loader2, Users, TrendingUp, Calculator, Settings } from 'lucide-react';
 import { StatCard } from './StatCard';
+import { SettingsPanel } from './SettingsPanel';
 import { formatCurrency, formatDate } from '../../lib/utils';
 import type { ROICalculation, DashboardStats } from '../../types';
 
@@ -17,8 +19,11 @@ export const AdminDashboard = ({
   loading,
   onLogout,
   onRefresh,
-}: AdminDashboardProps) => (
-  <div className="min-h-screen bg-slate-100">
+}: AdminDashboardProps) => {
+  const [showSettings, setShowSettings] = useState(false);
+
+  return (
+    <div className="min-h-screen bg-slate-100">
     <header className="bg-white border-b border-slate-200 px-6 py-4">
       <div className="max-w-6xl mx-auto flex items-center justify-between">
         <div className="flex items-center gap-3">
@@ -28,6 +33,12 @@ export const AdminDashboard = ({
           <h1 className="font-semibold text-slate-800">AI ROI Calculator - Admin</h1>
         </div>
         <div className="flex items-center gap-4">
+          <button
+            onClick={() => setShowSettings(!showSettings)}
+            className="flex items-center gap-2 text-sm text-slate-600 hover:text-slate-900"
+          >
+            <Settings className="w-4 h-4" /> Configuración
+          </button>
           <button
             onClick={onRefresh}
             disabled={loading}
@@ -46,6 +57,12 @@ export const AdminDashboard = ({
     </header>
 
     <main className="max-w-6xl mx-auto p-6">
+      {showSettings && (
+        <div className="mb-6">
+          <SettingsPanel onUpdate={onRefresh} />
+        </div>
+      )}
+      
       <div className="grid md:grid-cols-4 gap-4 mb-6">
         <StatCard
           icon={Users}
@@ -118,5 +135,6 @@ export const AdminDashboard = ({
       </div>
     </main>
   </div>
-);
+  );
+};
 

@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useAuth } from './hooks/useAuth';
 import { useCalculations } from './hooks/useCalculations';
+import { useSettings } from './hooks/useSettings';
 import { calculateROI, prepareCalculationForDB } from './lib/utils';
 import { Calculator } from './pages/Calculator';
 import { Admin } from './pages/Admin';
@@ -15,6 +16,7 @@ export default function App() {
 
   const auth = useAuth();
   const calc = useCalculations();
+  const settings = useSettings();
 
   // Redirect to admin if already logged in
   useEffect(() => {
@@ -25,7 +27,7 @@ export default function App() {
   }, [auth.isAdmin, view, calc]);
 
   const handleCalculate = async (data: CalculatorFormData) => {
-    const roi = calculateROI(data);
+    const roi = calculateROI(data, settings.paypFeePercentage);
     const dbData = prepareCalculationForDB(data, roi);
 
     const { success } = await calc.saveCalculation(dbData);
@@ -72,6 +74,7 @@ export default function App() {
       view={view}
       formData={formData}
       results={results}
+      paypFeePercentage={settings.paypFeePercentage}
       loading={calc.loading}
       onCalculate={handleCalculate}
       onReset={() => setView('calculator')}

@@ -68,7 +68,10 @@ export const formatDate = (dateString: string): string => {
 const parseNum = (value: string): number => parseFloat(value) || 0;
 
 // Calculate ROI results
-export const calculateROI = (data: CalculatorFormData): CalculationResults => {
+export const calculateROI = (
+  data: CalculatorFormData,
+  paypFeePercentage: number = PAYP_FEE_PERCENTAGE
+): CalculationResults => {
   const inventoryValue = parseNum(data.inventoryValue);
   const storageCosts = parseNum(data.storageCosts);
   const currentTurnover = parseNum(data.currentTurnover) || 1;
@@ -90,10 +93,10 @@ export const calculateROI = (data: CalculatorFormData): CalculationResults => {
 
   // Totals
   const totalBenefit = savingsStorage + capitalFreed + savingsPurchases + savingsStockouts;
-  // PAYP fee: 25% of total benefit
+  // PAYP fee: percentage of total benefit (configurable via admin panel)
   // Max cap commented out for testing scenarios
-  // const paypFee = Math.max(0, Math.min(142000, totalBenefit * PAYP_FEE_PERCENTAGE));
-  const paypFee = Math.max(0, totalBenefit * PAYP_FEE_PERCENTAGE);
+  // const paypFee = Math.max(0, Math.min(142000, totalBenefit * paypFeePercentage));
+  const paypFee = Math.max(0, totalBenefit * paypFeePercentage);
   const netBenefit = totalBenefit - paypFee;
 
   return {

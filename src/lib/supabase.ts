@@ -60,3 +60,39 @@ export const isAdminUser = async (email: string) => {
     .single();
   return { isAdmin: !!data && !error, error };
 };
+
+// Settings helpers
+export const getSetting = async (key: string) => {
+  const { data, error } = await supabase
+    .from('app_settings')
+    .select('value')
+    .eq('key', key)
+    .single();
+  return { value: data?.value || null, error };
+};
+
+export const updateSetting = async (key: string, value: string) => {
+  const { data: session } = await supabase.auth.getSession();
+  
+  const { data, error } = await supabase
+    .from('app_settings')
+    .upsert({
+      key,
+      value,
+      updated_at: new Date().toISOString(),
+      updated_by: session.session?.user?.id || null,
+    }, {
+      onConflict: 'key',
+    })
+    .select()
+    .single();
+  return { data, error };
+};
+
+export const getAllSettings = async () => {
+  const { data, error } = await supabase
+    .from('app_settings')
+    .select('*')
+    .order('key');
+  return { data, error };
+};
