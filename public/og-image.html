@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      width: 1200px;
+      height: 630px;
+      background: linear-gradient(135deg, #2563EB 0%, #1E40AF 100%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      font-family: Arial, sans-serif;
+      color: white;
+      overflow: hidden;
+    }
+    .calculator-icon {
+      width: 200px;
+      height: 280px;
+      border: 8px solid white;
+      border-radius: 10px;
+      position: relative;
+      margin-bottom: 40px;
+    }
+    .calculator-screen {
+      width: 180px;
+      height: 60px;
+      background: rgba(255, 255, 255, 0.2);
+      border-radius: 5px;
+      position: absolute;
+      top: 20px;
+      left: 10px;
+    }
+    .calculator-line {
+      width: 160px;
+      height: 4px;
+      background: white;
+      position: absolute;
+      top: 50px;
+      left: 20px;
+      border-radius: 2px;
+    }
+    .button-grid {
+      position: absolute;
+      top: 90px;
+      left: 20px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 30px;
+      width: 160px;
+    }
+    .button-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 30px;
+    }
+    .button {
+      width: 24px;
+      height: 24px;
+      background: white;
+      border-radius: 50%;
+    }
+    .title {
+      font-size: 64px;
+      font-weight: bold;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+    .subtitle {
+      font-size: 32px;
+      opacity: 0.9;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <div class="calculator-icon">
+    <div class="calculator-screen"></div>
+    <div class="calculator-line"></div>
+    <div class="button-grid">
+      <div class="button-row">
+        <div class="button"></div>
+        <div class="button"></div>
+        <div class="button"></div>
+      </div>
+      <div class="button-row">
+        <div class="button"></div>
+        <div class="button"></div>
+        <div class="button"></div>
+      </div>
+      <div class="button-row">
+        <div class="button"></div>
+        <div class="button"></div>
+        <div class="button"></div>
+      </div>
+      <div class="button-row">
+        <div class="button"></div>
+        <div class="button"></div>
+        <div class="button"></div>
+      </div>
+    </div>
+  </div>
+  <h1 class="title">Calculadora de ROI</h1>
+  <p class="subtitle">AI Refill - Optimización de Inventario</p>
+</body>
+</html>
+
