@@ -1,0 +1,49 @@
+ai-roi-calculator/
+├── .env.local                 # Environment variables (gitignored)
+├── .env.example               # Template for env vars
+├── .gitignore
+├── package.json
+├── vite.config.ts
+├── tsconfig.json
+├── tailwind.config.js
+├── postcss.config.js
+├── index.html
+├── public/
+│   └── logo.svg               # Add your logo here
+├── src/
+│   ├── main.tsx
+│   ├── App.tsx
+│   ├── index.css
+│   ├── lib/
+│   │   ├── supabase.ts        # Supabase client
+│   │   ├── constants.ts       # Benchmarks, targets
+│   │   └── utils.ts           # Formatters, calculations
+│   ├── types/
+│   │   └── index.ts           # TypeScript types
+│   ├── hooks/
+│   │   ├── useAuth.ts         # Auth state management
+│   │   └── useCalculations.ts # CRUD for calculations
+│   ├── components/
+│   │   ├── ui/
+│   │   │   ├── Input.tsx
+│   │   │   ├── Select.tsx
+│   │   │   ├── Button.tsx
+│   │   │   └── Card.tsx
+│   │   ├── calculator/
+│   │   │   ├── CalculatorForm.tsx
+│   │   │   ├── ResultsView.tsx
+│   │   │   ├── GoalCard.tsx
+│   │   │   └── SummaryCard.tsx
+│   │   ├── admin/
+│   │   │   ├── AdminLogin.tsx
+│   │   │   ├── AdminDashboard.tsx
+│   │   │   └── LeadsTable.tsx
+│   │   └── layout/
+│   │       ├── Header.tsx
+│   │       └── Footer.tsx
+│   └── pages/
+│       ├── Calculator.tsx
+│       └── Admin.tsx
+└── supabase/
+    ├── schema.sql             # Database schema
+    └── seed.sql               # Optional test data
