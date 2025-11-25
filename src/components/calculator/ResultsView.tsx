@@ -1,8 +1,10 @@
 import { Package, TrendingUp, ShoppingCart, AlertTriangle, Download } from 'lucide-react';
+import { useState } from 'react';
 import { Button } from '../ui/Button';
 import { GoalCard } from './GoalCard';
 import { SummaryCard } from './SummaryCard';
 import { formatCurrency, formatPayback } from '../../lib/utils';
+import { exportToPDF } from '../../lib/pdfExport';
 import { MCKINSEY_BENCHMARKS, CLIENT_TARGETS, MCKINSEY_SOURCE, PAYP_FEE_PERCENTAGE } from '../../lib/constants';
 import type { CalculatorFormData, CalculationResults } from '../../types';
 
@@ -12,22 +14,43 @@ interface ResultsViewProps {
   onReset: () => void;
 }
 
-export const ResultsView = ({ data, results, onReset }: ResultsViewProps) => (
-  <div id="results-printable">
-    <div className="flex items-center justify-between mb-6 print:mb-4">
-      <div>
-        <h2 className="text-xl font-bold text-slate-900">{data.companyName}</h2>
-        <p className="text-sm text-slate-500">Proyección de ROI con AI Refill</p>
+export const ResultsView = ({ data, results, onReset }: ResultsViewProps) => {
+  const [isExporting, setIsExporting] = useState(false);
+
+  const handleExportPDF = async () => {
+    setIsExporting(true);
+    try {
+      const filename = `ROI-${data.companyName || 'Calculo'}-${new Date().toISOString().split('T')[0]}.pdf`;
+      await exportToPDF('results-printable', filename);
+    } catch (error) {
+      console.error('Error exporting PDF:', error);
+      alert('Error al exportar PDF. Por favor intenta de nuevo.');
+    } finally {
+      setIsExporting(false);
+    }
+  };
+
+  return (
+    <div id="results-printable">
+      <div className="flex items-center justify-between mb-6 print:mb-4">
+        <div>
+          <h2 className="text-xl font-bold text-slate-900">{data.companyName || 'Cálculo de ROI'}</h2>
+          <p className="text-sm text-slate-500">Proyección de ROI con AI Refill</p>
+        </div>
+        <div className="flex gap-2 print:hidden">
+          <Button 
+            variant="secondary" 
+            onClick={handleExportPDF}
+            disabled={isExporting}
+          >
+            <Download className="w-4 h-4" /> 
+            {isExporting ? 'Exportando...' : 'Exportar PDF'}
+          </Button>
+          <Button variant="secondary" onClick={onReset}>
+            Nuevo Cálculo
+          </Button>
+        </div>
       </div>
-      <div className="flex gap-2 print:hidden">
-        <Button variant="secondary" onClick={() => window.print()}>
-          <Download className="w-4 h-4" /> Exportar PDF
-        </Button>
-        <Button variant="secondary" onClick={onReset}>
-          Nuevo Cálculo
-        </Button>
-      </div>
-    </div>
 
     <div className="grid md:grid-cols-2 gap-4 mb-6">
       <GoalCard
@@ -115,5 +138,6 @@ export const ResultsView = ({ data, results, onReset }: ResultsViewProps) => (
       </p>
     </div>
   </div>
-);
+  );
+};
 
