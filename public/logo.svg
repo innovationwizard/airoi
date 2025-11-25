@@ -1,0 +1,35 @@
+<svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Blue background circle -->
+  <circle cx="32" cy="32" r="32" fill="#2563EB"/>
+  
+  <!-- Calculator icon (white) - based on Lucide Calculator icon -->
+  <g transform="translate(12, 12)">
+    <!-- Calculator body -->
+    <rect x="2" y="2" width="28" height="36" rx="2" stroke="white" stroke-width="2" fill="none"/>
+    
+    <!-- Screen/Display -->
+    <rect x="4" y="6" width="24" height="8" rx="1" fill="white" opacity="0.15"/>
+    <line x1="6" y1="9" x2="26" y2="9" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
+    
+    <!-- Button grid -->
+    <!-- Row 1 -->
+    <circle cx="9" cy="18" r="2" fill="white"/>
+    <circle cx="16" cy="18" r="2" fill="white"/>
+    <circle cx="23" cy="18" r="2" fill="white"/>
+    
+    <!-- Row 2 -->
+    <circle cx="9" cy="25" r="2" fill="white"/>
+    <circle cx="16" cy="25" r="2" fill="white"/>
+    <circle cx="23" cy="25" r="2" fill="white"/>
+    
+    <!-- Row 3 -->
+    <circle cx="9" cy="32" r="2" fill="white"/>
+    <circle cx="16" cy="32" r="2" fill="white"/>
+    <circle cx="23" cy="32" r="2" fill="white"/>
+    
+    <!-- Row 4 -->
+    <circle cx="9" cy="39" r="2" fill="white"/>
+    <circle cx="16" cy="39" r="2" fill="white"/>
+    <circle cx="23" cy="39" r="2" fill="white"/>
+  </g>
+</svg>
