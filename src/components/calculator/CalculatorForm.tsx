@@ -23,6 +23,7 @@ export const CalculatorForm = ({ onCalculate, loading }: CalculatorFormProps) =>
     currentTurnover: '',
     annualPurchases: '',
     lostSales: '',
+    initialCost: '',
   });
   const [errors, setErrors] = useState<string[]>([]);
 
@@ -139,6 +140,14 @@ export const CalculatorForm = ({ onCalculate, loading }: CalculatorFormProps) =>
           onChange={(v) => update('lostSales', v)}
           required
           placeholder="1,000,000"
+        />
+        <Input
+          label="Costo inicial de implementación"
+          type="number"
+          prefix="Q"
+          value={form.initialCost}
+          onChange={(v) => update('initialCost', v)}
+          placeholder="0 (opcional)"
         />
       </div>
 

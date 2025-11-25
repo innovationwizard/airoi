@@ -8,6 +8,7 @@ export interface CalculatorFormData {
   currentTurnover: string;
   annualPurchases: string;
   lostSales: string;
+  initialCost: string;
 }
 
 export interface CalculationResults {

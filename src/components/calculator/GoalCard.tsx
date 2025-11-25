@@ -7,6 +7,7 @@ interface GoalCardProps {
   target: number;
   savings: number;
   benchmark: string;
+  benchmarkMax: number;
   timeline: string;
   color: string;
 }
@@ -17,6 +18,7 @@ export const GoalCard = ({
   target, 
   savings, 
   benchmark, 
+  benchmarkMax,
   timeline, 
   color 
 }: GoalCardProps) => (
@@ -42,7 +44,7 @@ export const GoalCard = ({
     <div className="mt-2 h-1.5 bg-slate-100 rounded-full overflow-hidden">
       <div 
         className="h-full bg-emerald-500 rounded-full" 
-        style={{ width: `${Math.min((target / 30) * 100, 100)}%` }} 
+        style={{ width: `${Math.min((target / benchmarkMax) * 100, 100)}%` }} 
       />
     </div>
   </div>

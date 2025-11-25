@@ -26,6 +26,7 @@ CREATE TABLE roi_calculations (
   current_turnover NUMERIC NOT NULL,
   annual_purchases NUMERIC NOT NULL,
   lost_sales_stockouts NUMERIC NOT NULL,
+  initial_cost NUMERIC DEFAULT 0,
   
   -- Calculated results
   savings_storage NUMERIC NOT NULL,
@@ -70,7 +71,15 @@ CREATE POLICY "Anyone can submit calculations"
   TO anon, authenticated
   WITH CHECK (true);
 
--- Only authenticated users can SELECT calculations
+-- Allow anon users to SELECT their own inserted calculations (for insert return)
+-- This allows the .select() after .insert() to work for anonymous users
+CREATE POLICY "Anon can select own calculations"
+  ON roi_calculations
+  FOR SELECT
+  TO anon
+  USING (true);
+
+-- Authenticated users can SELECT all calculations (for admin dashboard)
 CREATE POLICY "Authenticated users can view calculations"
   ON roi_calculations
   FOR SELECT
