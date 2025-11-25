@@ -14,9 +14,9 @@ CREATE TABLE roi_calculations (
   id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
   created_at TIMESTAMPTZ DEFAULT NOW() NOT NULL,
   
-  -- Lead info
-  company_name TEXT NOT NULL,
-  contact_email TEXT NOT NULL,
+  -- Lead info (optional for now)
+  company_name TEXT,
+  contact_email TEXT,
   industry TEXT,
   sku_count INTEGER,
   
